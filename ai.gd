@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends StaticBody2D
 
 @onready var screen_size: Vector2 = get_viewport().size
 
