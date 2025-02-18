@@ -9,7 +9,7 @@ var velocity: Vector2 = Vector2(-speed, speed)
 var reset_pos: bool = false
 
 signal ball_position(pos: Vector2)
-signal ball_exited
+signal ball_exited_screen
 
 func _draw() -> void:
 	draw_rect(Rect2(-8, -8, 16, 16), color, true)
@@ -29,7 +29,7 @@ func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
 		reset_pos = false
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
-	ball_exited.emit()
+	ball_exited_screen.emit()
 
 func start() -> void:
 	speed = 200

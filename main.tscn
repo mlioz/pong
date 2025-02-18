@@ -19,16 +19,16 @@ color = Color(0, 0, 0, 1)
 script = ExtResource("2_x5x7j")
 
 [node name="Player" parent="." instance=ExtResource("1_hjxcc")]
-position = Vector2(20, 998)
 color = Color(0, 1, 0.184314, 1)
+metadata/_edit_group_ = true
 
 [node name="AI" parent="." instance=ExtResource("1_hjxcc")]
-position = Vector2(2708, 898)
 script = ExtResource("3_8i7ov")
+metadata/_edit_group_ = true
 
 [node name="Ball" parent="." instance=ExtResource("2_bg5s2")]
-position = Vector2(0, 0)
-max_contacts_reported = 1
+contact_monitor = true
+max_contacts_reported = 20
 
 [node name="Floor" type="StaticBody2D" parent="."]
 metadata/_edit_group_ = true
@@ -50,6 +50,7 @@ shape = SubResource("WorldBoundaryShape2D_81mqf")
 wait_time = 5.0
 autostart = true
 
-[connection signal="ball_exited" from="Ball" to="." method="game_over"]
+[connection signal="ball_exited_screen" from="Ball" to="." method="game_over"]
 [connection signal="ball_position" from="Ball" to="AI" method="_on_ball_ball_position"]
+[connection signal="body_entered" from="Ball" to="." method="_on_ball_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

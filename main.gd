@@ -31,5 +31,7 @@ func game_over() -> void:
 	start_game()
 
 func _on_timer_timeout() -> void:
-	print($Ball.speed)
 	$Ball.speed += 50
+
+func _on_ball_body_entered(body: Node) -> void:
+	print("Contact with %s" % body.name)

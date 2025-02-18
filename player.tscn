@@ -9,7 +9,6 @@ bounce = 1.0
 size = Vector2(16, 128)
 
 [node name="Player" type="StaticBody2D"]
-position = Vector2(20, 324)
 physics_material_override = SubResource("PhysicsMaterial_n1vut")
 script = ExtResource("1_a8jis")
 
