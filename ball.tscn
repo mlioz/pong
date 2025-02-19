@@ -6,7 +6,7 @@
 friction = 0.0
 bounce = 1.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_fw2pl"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g7tl7"]
 
 [node name="Ball" type="RigidBody2D"]
 physics_material_override = SubResource("PhysicsMaterial_lhstf")
@@ -15,7 +15,7 @@ max_contacts_reported = 1
 script = ExtResource("1_yqm22")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_fw2pl")
+shape = SubResource("RectangleShape2D_g7tl7")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
