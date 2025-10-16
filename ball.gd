@@ -3,6 +3,7 @@ extends Area2D
 @onready var screen_size: Vector2 = get_viewport().size
 
 @export var speed: int = 200
+@export var speed_increase: int = 50
 @export var color: Color = Color.WHITE
 
 var initial_velocity: Vector2 = Vector2(-speed, speed)
@@ -30,9 +31,9 @@ func _process(delta: float) -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	if area.name == "Player":
-		current_velocity.x = abs(current_velocity.x)
+		current_velocity.x = abs(current_velocity.x - speed_increase)
 	elif area.name == "AI":
-		current_velocity.x = -abs(current_velocity.x)
+		current_velocity.x = -abs(current_velocity.x + speed_increase)
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	ball_exited_screen.emit()
