@@ -11,6 +11,10 @@ var ball_position: Vector2 = screen_size / 2
 func _draw():
 	draw_rect(Rect2(paddle_size.x / 2 * -1, paddle_size.y / 2 * -1, paddle_size.x, paddle_size.y), color, true)
 
+func center_paddle_position() -> void:
+	position.x = screen_size.x - 25
+	position.y = screen_size.y / 2
+
 func _process(delta: float) -> void:
 	position.y += position.direction_to(ball_position).normalized().y * speed * delta
 	

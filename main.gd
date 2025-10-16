@@ -1,24 +1,31 @@
 extends Node2D
 
 @onready var screen_size: Vector2 = get_viewport().size
-@onready var ui_player_score = $UI/MarginContainer/VBoxContainer/HBoxContainer/PlayerScore
-@onready var ui_ai_score = $UI/MarginContainer/VBoxContainer/HBoxContainer/AIScore
+@onready var ui_player_score = $UI/Score/MarginContainer/VBoxContainer/HBoxContainer/PlayerScore
+@onready var ui_ai_score = $UI/Score/MarginContainer/VBoxContainer/HBoxContainer/AIScore
+@onready var ui_play_button: Button = $UI/MainMenu/MarginContainer/VBoxContainer/Start
+@onready var ui_quit_button: Button = $UI/MainMenu/MarginContainer/VBoxContainer/Quit
 
 var score_player: int = 0
 var score_ai: int = 0
 
 func _ready() -> void:
-	start_game()
+	ui_play_button.pressed.connect(start_game)
 
-func start_game() -> void:
-	$Player.position.x = 20
-	$Player.position.y = screen_size.y / 2
+	$Player.center_paddle_position()
+	$AI.center_paddle_position()
 	
-	$AI.position.x = screen_size.x - 25
-	$AI.position.y = screen_size.y / 2
-	
-	$Ball.start()
+	pause()
 
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("pause"):
+		ui_play_button.text = "Resume"
+		pause()
+
+func start_game() -> void:	
+	ui_play_button.text = "Start Game"
+	unpause()
+	
 func game_over() -> void:
 	if $Ball.position.x < 0:
 		score_ai += 1
@@ -26,12 +33,25 @@ func game_over() -> void:
 	else:
 		score_player += 1
 		ui_player_score.text = str(score_player)
-		
+	
+	$Player.center_paddle_position()
+	$AI.center_paddle_position()
+	$Ball.start()
+	
 	print("Game Over. Player score: %s, AI score: %s" % [score_player, score_ai])
-	start_game()
+	
+	pause()
 
 func _on_timer_timeout() -> void:
 	$Ball.speed += 50
 
 func _on_ball_body_entered(body: Node) -> void:
 	print("Contact with %s" % body.name)
+
+func pause() -> void:
+	get_tree().paused = true
+	$UI/MainMenu.show()
+
+func unpause() -> void:
+	get_tree().paused = false
+	$UI/MainMenu.hide()

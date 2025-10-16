@@ -9,7 +9,11 @@ extends Area2D
 func _draw():
 	draw_rect(Rect2(paddle_size.x / 2 * -1, paddle_size.y / 2 * -1, paddle_size.x, paddle_size.y), color, true)
 
-func _physics_process(delta: float) -> void:
+func center_paddle_position() -> void:
+	position.x = 20
+	position.y = screen_size.y / 2
+
+func _process(delta: float) -> void:
 	var axis = Input.get_axis("ui_up", "ui_down")
 	
 	position.y += axis * speed * delta
