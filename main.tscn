@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://brxmjkgctxv2m"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_ha6rp"]
+[ext_resource type="Script" uid="uid://ditp5ps5bt8ji" path="res://main.gd" id="1_ha6rp"]
 [ext_resource type="PackedScene" uid="uid://ciis0dt5ju1jk" path="res://player.tscn" id="1_hjxcc"]
 [ext_resource type="PackedScene" uid="uid://bpwnrfmt3m86n" path="res://ball.tscn" id="2_bg5s2"]
-[ext_resource type="Script" path="res://background.gd" id="2_x5x7j"]
-[ext_resource type="Script" path="res://ai.gd" id="3_8i7ov"]
+[ext_resource type="Script" uid="uid://c4imiwaksqa1u" path="res://background.gd" id="2_x5x7j"]
+[ext_resource type="Script" uid="uid://bhqe3rmml6l8r" path="res://ai.gd" id="3_8i7ov"]
 [ext_resource type="PackedScene" uid="uid://clkc2d78w8hbj" path="res://ui.tscn" id="6_ag1i5"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_81mqf"]
@@ -19,25 +19,22 @@ color = Color(0, 0, 0, 1)
 script = ExtResource("2_x5x7j")
 
 [node name="Player" parent="." instance=ExtResource("1_hjxcc")]
-physics_material_override = null
 color = Color(0, 1, 0.184314, 1)
 
 [node name="AI" parent="." instance=ExtResource("1_hjxcc")]
-physics_material_override = null
 script = ExtResource("3_8i7ov")
 
 [node name="Ball" parent="." instance=ExtResource("2_bg5s2")]
-contact_monitor = true
-max_contacts_reported = 2
+position = Vector2(232, 104)
 
-[node name="Floor" type="StaticBody2D" parent="."]
+[node name="Floor" type="Area2D" parent="."]
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 position = Vector2(0, 648)
 shape = SubResource("WorldBoundaryShape2D_81mqf")
 
-[node name="Ceiling" type="StaticBody2D" parent="."]
+[node name="Ceiling" type="Area2D" parent="."]
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling"]
@@ -52,5 +49,4 @@ autostart = true
 
 [connection signal="ball_exited_screen" from="Ball" to="." method="game_over"]
 [connection signal="ball_position" from="Ball" to="AI" method="_on_ball_ball_position"]
-[connection signal="body_entered" from="Ball" to="." method="_on_ball_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,15 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://ciis0dt5ju1jk"]
+[gd_scene load_steps=3 format=3 uid="uid://ciis0dt5ju1jk"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_a8jis"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_n1vut"]
-bounce = 1.0
+[ext_resource type="Script" uid="uid://cd7wdqws5xx53" path="res://player.gd" id="1_a8jis"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j4k55"]
 size = Vector2(16, 128)
 
-[node name="Player" type="StaticBody2D"]
-physics_material_override = SubResource("PhysicsMaterial_n1vut")
+[node name="Player" type="Area2D"]
 script = ExtResource("1_a8jis")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
