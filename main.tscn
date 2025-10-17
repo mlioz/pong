@@ -28,4 +28,4 @@ position = Vector2(232, 104)
 [node name="UI" parent="." instance=ExtResource("6_ag1i5")]
 
 [connection signal="ball_exited_screen" from="Ball" to="." method="game_over"]
-[connection signal="ball_position" from="Ball" to="AI" method="_on_ball_ball_position"]
+[connection signal="predicted_ball_bounce" from="Ball" to="AI" method="_on_ball_predicted_ball_bounce"]
