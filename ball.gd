@@ -16,18 +16,17 @@ signal ball_exited_screen
 func _draw() -> void:
 	draw_rect(Rect2(-8, -8, 16, 16), color, true)
 	
-func _process(delta: float) -> void:
-	if reset_pos == true:
-		position = screen_size / 2
-		current_velocity = initial_velocity
-		reset_pos = false
-	else:
-		position += current_velocity * delta
 	
-		if position.y < 0 or position.y > screen_size.y:
-			current_velocity.y = -current_velocity.y
+func center_ball() -> void:
+	position = screen_size / 2
+	current_velocity = initial_velocity
+	
+func _process(delta: float) -> void:
+	position += current_velocity * delta
+	if position.y < 0 or position.y > screen_size.y:
+		current_velocity.y = -current_velocity.y
 		
-		ball_position.emit(position)
+	ball_position.emit(position)
 
 func _on_area_entered(area: Area2D) -> void:
 	if area.name == "Player":
@@ -40,4 +39,3 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 
 func start() -> void:
 	speed = 200
-	reset_pos = true

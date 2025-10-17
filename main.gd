@@ -22,7 +22,7 @@ func _process(_delta: float) -> void:
 		ui_play_button.text = "Resume"
 		pause()
 
-func start_game() -> void:	
+func start_game() -> void:
 	ui_play_button.text = "Start Game"
 	unpause()
 	
@@ -36,14 +36,12 @@ func game_over() -> void:
 	
 	$Player.center_paddle_position()
 	$AI.center_paddle_position()
+	$Ball.center_ball()
 	$Ball.start()
 	
 	print("Game Over. Player score: %s, AI score: %s" % [score_player, score_ai])
 	
 	pause()
-
-func _on_timer_timeout() -> void:
-	$Ball.speed += 50
 
 func _on_ball_body_entered(body: Node) -> void:
 	print("Contact with %s" % body.name)

@@ -27,10 +27,5 @@ position = Vector2(232, 104)
 
 [node name="UI" parent="." instance=ExtResource("6_ag1i5")]
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 5.0
-autostart = true
-
 [connection signal="ball_exited_screen" from="Ball" to="." method="game_over"]
 [connection signal="ball_position" from="Ball" to="AI" method="_on_ball_ball_position"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
