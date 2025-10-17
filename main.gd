@@ -13,6 +13,7 @@ func _ready() -> void:
 	ui_play_button.pressed.connect(start_game)
 
 	$Player.center_paddle_position()
+	$Ball.center_ball()
 	$AI.center_paddle_position()
 	
 	pause()
@@ -37,14 +38,8 @@ func game_over() -> void:
 	$Player.center_paddle_position()
 	$AI.center_paddle_position()
 	$Ball.center_ball()
-	$Ball.start()
-	
-	print("Game Over. Player score: %s, AI score: %s" % [score_player, score_ai])
 	
 	pause()
-
-func _on_ball_body_entered(body: Node) -> void:
-	print("Contact with %s" % body.name)
 
 func pause() -> void:
 	get_tree().paused = true

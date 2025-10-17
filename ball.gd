@@ -16,11 +16,6 @@ signal ball_exited_screen
 func _draw() -> void:
 	draw_rect(Rect2(-8, -8, 16, 16), color, true)
 	
-	
-func center_ball() -> void:
-	position = screen_size / 2
-	current_velocity = initial_velocity
-	
 func _process(delta: float) -> void:
 	position += current_velocity * delta
 	if position.y < 0 or position.y > screen_size.y:
@@ -37,5 +32,6 @@ func _on_area_entered(area: Area2D) -> void:
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	ball_exited_screen.emit()
 
-func start() -> void:
-	speed = 200
+func center_ball() -> void:
+	position = screen_size / 2
+	current_velocity = initial_velocity
