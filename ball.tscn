@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bpwnrfmt3m86n"]
+[gd_scene load_steps=5 format=3 uid="uid://bpwnrfmt3m86n"]
 
 [ext_resource type="Script" uid="uid://h6pmx8utowar" path="res://ball.gd" id="1_yqm22"]
+[ext_resource type="AudioStream" uid="uid://xpmri0s1y1km" path="res://assets/low_bounce.wav" id="2_41u45"]
+[ext_resource type="AudioStream" uid="uid://4e72h0vnk1bh" path="res://assets/high_bounce.wav" id="3_ktgx5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g7tl7"]
 
@@ -11,6 +13,12 @@ script = ExtResource("1_yqm22")
 shape = SubResource("RectangleShape2D_g7tl7")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="LowBounceSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_41u45")
+
+[node name="HighBounceSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ktgx5")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

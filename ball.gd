@@ -1,5 +1,8 @@
 extends Area2D
 
+@onready var low_bounce_sound: AudioStreamPlayer2D = $LowBounceSound
+@onready var high_bounce_sound: AudioStreamPlayer2D = $HighBounceSound
+
 @onready var screen_size: Vector2 = get_viewport().size
 
 @export var speed: int = 200
@@ -20,14 +23,17 @@ func _process(delta: float) -> void:
 	position += current_velocity * delta
 	if position.y < 0 or position.y > screen_size.y:
 		current_velocity.y = -current_velocity.y
+		high_bounce_sound.play()
 		
 	ball_position.emit(position)
 
 func _on_area_entered(area: Area2D) -> void:
 	if area.name == "Player":
 		current_velocity.x = abs(current_velocity.x - speed_increase)
+		low_bounce_sound.play()
 	elif area.name == "AI":
 		current_velocity.x = -abs(current_velocity.x + speed_increase)
+		low_bounce_sound.play()
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	ball_exited_screen.emit()
