@@ -1,7 +1,7 @@
 extends Area2D
 
-@onready var low_bounce_sound: AudioStreamPlayer2D = $LowBounceSound
-@onready var high_bounce_sound: AudioStreamPlayer2D = $HighBounceSound
+@onready var low_bounce_sound: AudioStreamPlayer = $LowBounceSound
+@onready var high_bounce_sound: AudioStreamPlayer = $HighBounceSound
 
 @onready var screen_size: Vector2 = get_viewport().size
 
