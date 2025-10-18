@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var screen_size: Vector2 = get_viewport().size
 @onready var ui_player_score = $UI/Score/MarginContainer/VBoxContainer/HBoxContainer/PlayerScore
-@onready var ui_ai_score = $UI/Score/MarginContainer/VBoxContainer/HBoxContainer/AIScore
+@onready var ui_opponent_score = $UI/Score/MarginContainer/VBoxContainer/HBoxContainer/OpponentScore
 @onready var ui_play_button: Button = $UI/MainMenu/MarginContainer/VBoxContainer/Start
 @onready var ui_quit_button: Button = $UI/MainMenu/MarginContainer/VBoxContainer/Quit
 
@@ -12,9 +12,9 @@ var score_ai: int = 0
 func _ready() -> void:
 	ui_play_button.pressed.connect(start_game)
 
-	$Player.center_paddle_position()
-	$Ball.center_ball()
-	$AI.center_paddle_position()
+	$Player.reset_position()
+	$Ball.reset()
+	$Opponent.reset_position()
 	
 	pause()
 
@@ -30,14 +30,14 @@ func start_game() -> void:
 func game_over() -> void:
 	if $Ball.position.x < 0:
 		score_ai += 1
-		ui_ai_score.text = str(score_ai)
+		ui_opponent_score.text = str(score_ai)
 	else:
 		score_player += 1
 		ui_player_score.text = str(score_player)
 	
-	$Player.center_paddle_position()
-	$AI.center_paddle_position()
-	$Ball.center_ball()
+	$Player.reset_position()
+	$Opponent.reset_position()
+	$Ball.reset()
 	
 	pause()
 

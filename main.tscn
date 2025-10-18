@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://brxmjkgctxv2m"]
+[gd_scene load_steps=11 format=3 uid="uid://brxmjkgctxv2m"]
 
 [ext_resource type="Script" uid="uid://ditp5ps5bt8ji" path="res://main.gd" id="1_ha6rp"]
 [ext_resource type="PackedScene" uid="uid://ciis0dt5ju1jk" path="res://player.tscn" id="1_hjxcc"]
@@ -6,6 +6,18 @@
 [ext_resource type="Script" uid="uid://c4imiwaksqa1u" path="res://background.gd" id="2_x5x7j"]
 [ext_resource type="Script" uid="uid://bhqe3rmml6l8r" path="res://ai.gd" id="3_8i7ov"]
 [ext_resource type="PackedScene" uid="uid://clkc2d78w8hbj" path="res://ui.tscn" id="6_ag1i5"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5vw27"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7mycd"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7mycd"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_272bh"]
+friction = 0.0
+bounce = 1.0
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_ha6rp")
@@ -17,15 +29,34 @@ color = Color(0, 0, 0, 1)
 script = ExtResource("2_x5x7j")
 
 [node name="Player" parent="." instance=ExtResource("1_hjxcc")]
+physics_material_override = SubResource("PhysicsMaterial_5vw27")
 color = Color(0, 1, 0.184314, 1)
 
-[node name="AI" parent="." instance=ExtResource("1_hjxcc")]
+[node name="Opponent" parent="." instance=ExtResource("1_hjxcc")]
 script = ExtResource("3_8i7ov")
+color = Color(1, 0, 0, 1)
+
+[node name="OpponentSprite" type="Sprite2D" parent="Opponent"]
 
 [node name="Ball" parent="." instance=ExtResource("2_bg5s2")]
 position = Vector2(232, 104)
+max_speed = 1000
 
 [node name="UI" parent="." instance=ExtResource("6_ag1i5")]
 
+[node name="Ceiling" type="StaticBody2D" parent="."]
+rotation = 3.1415927
+physics_material_override = SubResource("PhysicsMaterial_7mycd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling"]
+shape = SubResource("WorldBoundaryShape2D_7mycd")
+
+[node name="Floor" type="StaticBody2D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_272bh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(0, 648)
+shape = SubResource("WorldBoundaryShape2D_7mycd")
+
 [connection signal="ball_exited_screen" from="Ball" to="." method="game_over"]
-[connection signal="predicted_ball_bounce" from="Ball" to="AI" method="_on_ball_predicted_ball_bounce"]
+[connection signal="predicted_ball_bounce" from="Ball" to="Opponent" method="_on_ball_predicted_ball_bounce"]

@@ -1,4 +1,4 @@
-extends Area2D
+extends StaticBody2D
 
 @onready var screen_size: Vector2 = get_viewport().size
 @onready var new_position: Vector2
@@ -7,18 +7,11 @@ extends Area2D
 @export var paddle_size: Vector2 = Vector2(16, 128)
 @export var color: Color = Color.RED
 
-var direction = 0
-
 func _ready() -> void:
-	center_paddle_position()
+	$OpponentSprite.texture = create_paddle_texture(color)
+	
+	reset_position()
 	new_position = position
-
-func _draw():
-	draw_rect(Rect2(paddle_size.x / 2 * -1, paddle_size.y / 2 * -1, paddle_size.x, paddle_size.y), color, true)
-
-func center_paddle_position() -> void:
-	position.x = screen_size.x - 25
-	position.y = screen_size.y / 2
 
 func _process(delta: float) -> void:
 	position.y = move_toward(position.y, new_position.y, speed * delta)
@@ -28,4 +21,13 @@ func _process(delta: float) -> void:
 
 func _on_ball_predicted_ball_bounce(y: int) -> void:
 	new_position.y = y
-	direction = (new_position.y - position.y)/abs(new_position.y - position.y)
+
+func reset_position() -> void:
+	position.x = screen_size.x - 25
+	position.y = screen_size.y / 2
+
+func create_paddle_texture(paddle_color: Color) -> ImageTexture:
+	var img = Image.create(int(paddle_size.x), int(paddle_size.y), false, Image.FORMAT_RGBA8)
+	img.fill(paddle_color)
+	
+	return ImageTexture.create_from_image(img)

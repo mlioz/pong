@@ -1,13 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://ciis0dt5ju1jk"]
+[gd_scene load_steps=4 format=3 uid="uid://ciis0dt5ju1jk"]
 
 [ext_resource type="Script" uid="uid://cd7wdqws5xx53" path="res://player.gd" id="1_a8jis"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4flbx"]
+friction = 0.0
+bounce = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j4k55"]
 size = Vector2(16, 128)
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="StaticBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_4flbx")
 script = ExtResource("1_a8jis")
+color = Color(0.64829665, 0.4063829, 0.8324367, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("RectangleShape2D_j4k55")
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]

@@ -6,11 +6,16 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g7tl7"]
 
-[node name="Ball" type="Area2D"]
+[node name="Ball" type="CharacterBody2D"]
+physics_interpolation_mode = 1
+safe_margin = 0.01
 script = ExtResource("1_yqm22")
+
+[node name="BallSprite" type="Sprite2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_g7tl7")
+one_way_collision = true
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
@@ -20,5 +25,4 @@ stream = ExtResource("2_41u45")
 [node name="HighBounceSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_ktgx5")
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

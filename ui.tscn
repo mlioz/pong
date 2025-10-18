@@ -45,7 +45,7 @@ size_flags_horizontal = 0
 text = "0"
 label_settings = SubResource("LabelSettings_h0uja")
 
-[node name="AIScore" type="Label" parent="Score/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="OpponentScore" type="Label" parent="Score/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "0"

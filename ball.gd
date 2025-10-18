@@ -1,4 +1,4 @@
-extends Area2D
+extends CharacterBody2D
 
 @onready var low_bounce_sound: AudioStreamPlayer = $LowBounceSound
 @onready var high_bounce_sound: AudioStreamPlayer = $HighBounceSound
@@ -6,46 +6,50 @@ extends Area2D
 @onready var screen_size: Vector2 = get_viewport().size
 
 @export var speed: int = 200
-@export var speed_increase: int = 50
-@export var color: Color = Color.WHITE
+@export var speed_increase: float = 0.1
+@export var max_speed: int = 400
 
-var initial_velocity: Vector2 = Vector2(-speed, speed)
-var current_velocity: Vector2 = initial_velocity
-var reset_pos: bool = false
+@export var color: Color = Color.WHITE
 
 signal predicted_ball_bounce(y: int)
 signal ball_exited_screen
 
-func _draw() -> void:
-	draw_rect(Rect2(-8, -8, 16, 16), color, true)
+func _ready() -> void:
+	var img = Image.create(16, 16, false, Image.FORMAT_RGBA8)
+	img.fill(color)
 	
-func _process(delta: float) -> void:
-	position += current_velocity * delta
+	var tex = ImageTexture.create_from_image(img)
 	
-	if position.y < 0 or position.y > screen_size.y:
-		current_velocity.y = -current_velocity.y
-		high_bounce_sound.play()
-		check_and_emit_ball_bounce_position(position, current_velocity)
-
-func _on_area_entered(area: Area2D) -> void:
-	if area.name == "Player":
-		current_velocity.x = abs(current_velocity.x - speed_increase)
-		low_bounce_sound.play()
-		check_and_emit_ball_bounce_position(position, current_velocity)
+	$BallSprite.texture = tex
+	
+	reset()
+	
+func _physics_process(delta: float) -> void:
+	var collision = move_and_collide(velocity * delta)
+	
+	if collision != null:
+		velocity = velocity.bounce(collision.get_normal())
 		
-	elif area.name == "AI":
-		current_velocity.x = -abs(current_velocity.x + speed_increase)
-		low_bounce_sound.play()
-	
+		velocity = velocity.normalized() * min(velocity.length() * (1 + speed_increase), max_speed)
+		
+		check_and_emit_ball_bounce_position(position, velocity)
+		
+		var collider = collision.get_collider()
+		if collider.name == "Player" or collider.name == "AI":
+			high_bounce_sound.play()
+		else:
+			low_bounce_sound.play()
+
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	ball_exited_screen.emit()
 
-func center_ball() -> void:
+func reset() -> void:
+	var dir = Vector2(randf_range(-1, 1), randf_range(-0.3, 0.3)).normalized() 
+	velocity = dir * speed
 	position = screen_size / 2
-	current_velocity = initial_velocity
 
 func check_and_emit_ball_bounce_position(ball_pos: Vector2, ball_vel: Vector2) -> void:
-	if current_velocity.x > 0:
+	if velocity.x > 0:
 			var ball_y_bounce_predictions = get_preicted_ball_bounce(ball_pos, ball_vel)
 			
 			# AI shouldn't move if the ball's bounce y coordinate is not on screen
