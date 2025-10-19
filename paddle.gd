@@ -1,6 +1,8 @@
 extends StaticBody2D
 class_name Paddle
 
+const PADDLE_SCENE: PackedScene = preload("res://paddle.tscn")
+
 @onready var screen_size: Vector2 = get_viewport().size
 @onready var new_position: Vector2
 @onready var paddle_size: Vector2 = Vector2(16, 128)
@@ -14,6 +16,14 @@ func _ready() -> void:
 		
 	if control_method == Globals.ControlMethod.COMPUTER:
 		new_position = position
+
+static func new_paddle(_color: Color, _control_method: Globals.ControlMethod) -> Paddle:
+	var paddle = PADDLE_SCENE.instantiate()
+	
+	paddle.color = _color
+	paddle.control_method = _control_method
+	
+	return paddle
 
 func reset_position(xpos: int, ypos: int) -> void:
 	position.x = xpos

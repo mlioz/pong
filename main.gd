@@ -2,8 +2,6 @@ extends Node2D
 
 @onready var screen_size: Vector2i = get_viewport().size
 
-@onready var paddle_scene: PackedScene = preload("res://paddle.tscn")
-
 @onready var ui_player_score = $UI/Score/MarginContainer/VBoxContainer/HBoxContainer/PlayerScore
 @onready var ui_opponent_score = $UI/Score/MarginContainer/VBoxContainer/HBoxContainer/OpponentScore
 
@@ -17,14 +15,8 @@ var score_player: int = 0
 var score_ai: int = 0
 
 func _ready() -> void:
-	player = paddle_scene.instantiate()
-	opponent = paddle_scene.instantiate()
-	
-	player.color = Color.GREEN
-	opponent.color = Color.RED
-	
-	player.control_method = Globals.ControlMethod.WASD
-	opponent.control_method = Globals.ControlMethod.COMPUTER
+	player = Paddle.new_paddle(Color.GREEN, Globals.ControlMethod.WASD)
+	opponent = Paddle.new_paddle(Color.RED, Globals.ControlMethod.COMPUTER)
 	
 	if opponent.control_method == Globals.ControlMethod.COMPUTER:
 		$Ball.predicted_ball_bounce.connect(opponent._on_ball_predicted_ball_bounce)

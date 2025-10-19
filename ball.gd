@@ -42,7 +42,8 @@ func _physics_process(delta: float) -> void:
 		else:
 			low_bounce_sound.play()
 		
-		print("Ball speed: %d" % velocity.length())
+		if velocity.length() < max_speed:
+			print("Ball speed: %d" % velocity.length())
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	ball_exited_screen.emit()
