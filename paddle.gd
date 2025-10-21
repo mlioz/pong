@@ -9,15 +9,15 @@ const PADDLE_SCENE: PackedScene = preload("res://paddle.tscn")
 
 @export var speed: float = 500
 @export var color: Color = Color.RED
-@export var control_method: Globals.ControlMethod = Globals.ControlMethod.WASD
+@export var control_method: Global.ControlMethod = Global.ControlMethod.WASD
 
 func _ready() -> void:
 	$PlayerSprite.texture = draw_paddle(color)
 		
-	if control_method == Globals.ControlMethod.COMPUTER:
+	if control_method == Global.ControlMethod.COMPUTER:
 		new_position = position
 
-static func new_paddle(_color: Color, _control_method: Globals.ControlMethod) -> Paddle:
+static func new_paddle(_color: Color, _control_method: Global.ControlMethod) -> Paddle:
 	var paddle = PADDLE_SCENE.instantiate()
 	
 	paddle.color = _color
@@ -31,14 +31,14 @@ func reset_position(xpos: int, ypos: int) -> void:
 
 func _process(delta: float) -> void:
 	
-	if control_method == Globals.ControlMethod.COMPUTER:
+	if control_method == Global.ControlMethod.COMPUTER:
 		position.y = move_toward(position.y, new_position.y, speed * delta)
 	
 		# Prevents the paddle from going off the screen
 		position.y = clampf(position.y, paddle_size.y / 2, screen_size.y - paddle_size.y / 2)
 	else:
 		var axis
-		if control_method == Globals.ControlMethod.ARROWS:
+		if control_method == Global.ControlMethod.ARROWS:
 			axis = Input.get_axis("ui_up", "ui_down")
 		else:
 			axis = Input.get_axis("w", "s")
