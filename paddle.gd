@@ -12,7 +12,7 @@ const PADDLE_SCENE: PackedScene = preload("res://paddle.tscn")
 @export var control_method: Globals.ControlMethod = Globals.ControlMethod.WASD
 
 func _ready() -> void:
-	$PlayerSprite.texture = create_paddle_texture(color)
+	$PlayerSprite.texture = draw_paddle(color)
 		
 	if control_method == Globals.ControlMethod.COMPUTER:
 		new_position = position
@@ -48,12 +48,22 @@ func _process(delta: float) -> void:
 		# Prevents the paddle from going off the screen
 		position.y = clampf(position.y, paddle_size.y / 2, screen_size.y - paddle_size.y / 2)
 
-func create_paddle_texture(paddle_color: Color) -> ImageTexture:
+func draw_paddle(paddle_color: Color) -> ImageTexture:
 	var img = Image.create(int(paddle_size.x), int(paddle_size.y), false, Image.FORMAT_RGBA8)
 	img.fill(paddle_color)
 	
 	return ImageTexture.create_from_image(img)
 
-func _on_ball_predicted_ball_bounce(y: int) -> void:
-	new_position.y = y
+func on_ball_bounce(pos: Vector2, vel: Vector2) -> void:
+	new_position.y = get_ball_path(pos, vel)
 	
+func get_ball_path(pos: Vector2, vel: Vector2) -> int:
+	 #Using a parametric line equation to define the ball's path to find what y value it will bounce on the AI's wall
+	 #pos = (posx, posy)
+	 #vel = (velx, vely)
+	 #x(t) = posx + velx*t
+	 #y(t) = posy + vely*t
+	 #t = (x - pox)/velx
+	 #y = posy + vely/velx*(x-posx)
+
+	return pos.y + vel.y/vel.x * (position.x - pos.x)

@@ -15,11 +15,14 @@ var score_player: int = 0
 var score_ai: int = 0
 
 func _ready() -> void:
-	player = Paddle.new_paddle(Color.GREEN, Globals.ControlMethod.WASD)
+	player = Paddle.new_paddle(Color.GREEN, Globals.ControlMethod.COMPUTER)
 	opponent = Paddle.new_paddle(Color.RED, Globals.ControlMethod.COMPUTER)
 	
 	if opponent.control_method == Globals.ControlMethod.COMPUTER:
-		$Ball.predicted_ball_bounce.connect(opponent._on_ball_predicted_ball_bounce)
+		$Ball.ball_bounced.connect(opponent.on_ball_bounce)
+	
+	if player.control_method == Globals.ControlMethod.COMPUTER:
+		$Ball.ball_bounced.connect(player.on_ball_bounce)
 	
 	self.add_child(player)
 	self.add_child(opponent)
@@ -37,6 +40,8 @@ func _process(_delta: float) -> void:
 func start_game() -> void:
 	ui_play_button.text = "Start Game"
 	unpause()
+	player.on_ball_bounce($Ball.position, $Ball.velocity)
+	opponent.on_ball_bounce($Ball.position, $Ball.velocity)
 	
 func game_over() -> void:
 	if $Ball.position.x < 0:
