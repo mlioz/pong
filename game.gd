@@ -5,8 +5,8 @@ const GAME: PackedScene = preload("res://game.tscn")
 
 @onready var screen_size: Vector2i = get_viewport().size
 
-@onready var ui_player_score = $UI/Score/MarginContainer/VBoxContainer/HBoxContainer/PlayerScore
-@onready var ui_opponent_score = $UI/Score/MarginContainer/VBoxContainer/HBoxContainer/OpponentScore
+@onready var ui_player_score: Label = $UI/Score/MarginContainer/VBoxContainer/HBoxContainer/PlayerScore
+@onready var ui_opponent_score: Label = $UI/Score/MarginContainer/VBoxContainer/HBoxContainer/OpponentScore
 
 @onready var ui_resume_button: Button = $UI/PauseMenu/MarginContainer/VBoxContainer/Resume
 @onready var ui_quit_button: Button = $UI/PauseMenu/MarginContainer/VBoxContainer/Quit
@@ -15,7 +15,7 @@ var player: Paddle
 var opponent: Paddle
 
 var score_player: int = 0
-var score_ai: int = 0
+var score_opponent: int = 0
 
 func _ready() -> void:
 	player = Paddle.new_paddle(Color.GREEN, Global.player_1_control_method)
@@ -46,8 +46,8 @@ func start_game() -> void:
 	
 func game_over() -> void:
 	if $Ball.position.x < 0:
-		score_ai += 1
-		ui_opponent_score.text = str(score_ai)
+		score_opponent += 1
+		ui_opponent_score.text = str(score_opponent)
 	else:
 		score_player += 1
 		ui_player_score.text = str(score_player)
