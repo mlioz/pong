@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bpwnrfmt3m86n"]
 
 [ext_resource type="Script" uid="uid://h6pmx8utowar" path="res://ball.gd" id="1_yqm22"]
-[ext_resource type="AudioStream" uid="uid://cu4uxh6x0i0a2" path="res://assets/sound copy.wav" id="2_41u45"]
-[ext_resource type="AudioStream" uid="uid://dl06ssb77l22c" path="res://assets/sound.wav" id="3_ktgx5"]
+[ext_resource type="AudioStream" uid="uid://cu4uxh6x0i0a2" path="res://assets/low.wav" id="2_41u45"]
+[ext_resource type="AudioStream" uid="uid://dl06ssb77l22c" path="res://assets/high.wav" id="3_ktgx5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g7tl7"]
 

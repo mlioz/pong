@@ -24,7 +24,6 @@ func _ready() -> void:
 	$BallSprite.texture = tex
 	
 	reset()
-	print("Ball speed: ", velocity.length())
 	
 func _physics_process(delta: float) -> void:
 	var collision = move_and_collide(velocity * delta)
@@ -40,9 +39,6 @@ func _physics_process(delta: float) -> void:
 			high_bounce_sound.play()
 		else:
 			low_bounce_sound.play()
-		
-		if velocity.length() < max_speed:
-			print("Ball speed: %d" % velocity.length())
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	ball_exited_screen.emit()
