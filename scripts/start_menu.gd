@@ -1,13 +1,10 @@
 extends Control
 
-@export var player_1_option_button: Button
-@export var player_2_option_button: Button
+@export var player_1_option_button: OptionButton
+@export var player_2_option_button: OptionButton
 @export var quit_button: Button
 
 func _ready() -> void:
-	Global.player_1_control_method = Global.ControlMethod.COMPUTER
-	Global.player_2_control_method = Global.ControlMethod.COMPUTER
-	
 	for i in Global.ControlMethod.keys():
 		player_1_option_button.add_item(i)
 		player_2_option_button.add_item(i)

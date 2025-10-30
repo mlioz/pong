@@ -1,13 +1,32 @@
-[gd_scene load_steps=3 format=3 uid="uid://ciis0dt5ju1jk"]
+[gd_scene load_steps=3 format=3 uid="uid://qet1tfjqc86l"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_a8jis"]
+[sub_resource type="GDScript" id="GDScript_u8vuu"]
+script/source = "extends CharacterBody2D
+
+@onready var screen_size: Vector2 = get_viewport().size
+
+@export var speed: float = 500
+@export var paddle_size: Vector2 = Vector2(16, 128)
+@export var color: Color = Color.RED
+
+func _draw():
+	draw_rect(Rect2(paddle_size.x / 2 * -1, paddle_size.y / 2 * -1, paddle_size.x, paddle_size.y), color, true)
+
+func _physics_process(delta: float) -> void:
+	var axis = Input.get_axis(\"ui_up\", \"ui_down\")
+	
+	position.y += axis * speed * delta
+	
+	# Prevents the paddle from going off the screen
+	position.y = clampf(position.y, paddle_size.y / 2, screen_size.y - paddle_size.y / 2)
+"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j4k55"]
 size = Vector2(16, 128)
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(20, 324)
-script = ExtResource("1_a8jis")
+script = SubResource("GDScript_u8vuu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_j4k55")

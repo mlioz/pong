@@ -15,7 +15,6 @@ script = ExtResource("1_a8jis")
 color = Color(0.9843137, 0, 0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("RectangleShape2D_j4k55")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
