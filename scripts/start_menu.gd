@@ -1,7 +1,5 @@
 extends Control
 
-const GAME: PackedScene = preload("res://scenes/game.tscn")
-
 @onready var player_1_option_button: OptionButton = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Player1OptionButton
 @onready var player_2_option_button: OptionButton = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Player2OptionButton
 
@@ -14,7 +12,7 @@ func _ready() -> void:
 	player_2_option_button.select(0)
 
 func _on_start_game_button_pressed() -> void:
-	get_tree().change_scene_to_packed(GAME)
+	get_tree().change_scene_to_file("res://scenes/game.tscn")
 
 func _on_player_1_option_button_item_selected(index: int) -> void:
 	Global.player_1_control_method = get_control_method_by_index(index)

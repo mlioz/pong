@@ -1,13 +1,11 @@
 extends Node2D
 class_name Game
 
-const GAME: PackedScene = preload("res://scenes/game.tscn")
-
 @onready var ui_player_score: Label = $UI/Score/MarginContainer/HBoxContainer/PlayerScore
 @onready var ui_opponent_score: Label = $UI/Score/MarginContainer/HBoxContainer/OpponentScore
 
 @onready var ui_resume_button: Button = $UI/PauseMenu/MarginContainer/VBoxContainer/Resume
-@onready var ui_quit_button: Button = $UI/PauseMenu/MarginContainer/VBoxContainer/Quit
+@onready var ui_back_button: Button = $UI/PauseMenu/MarginContainer/VBoxContainer/Back
 
 var player: Paddle
 var opponent: Paddle
@@ -29,6 +27,7 @@ func _ready() -> void:
 	self.add_child(opponent)
 	
 	ui_resume_button.pressed.connect(start_game)
+	ui_back_button.pressed.connect(_on_back_button_pressed)
 	
 	reset_game()
 	start_game()
@@ -36,6 +35,10 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("pause"):
 		pause()
+
+func _on_back_button_pressed() -> void:
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://scenes/start_menu.tscn")
 
 func start_game() -> void:
 	unpause()
