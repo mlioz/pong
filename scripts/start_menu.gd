@@ -1,15 +1,22 @@
 extends Control
 
-@onready var player_1_option_button: OptionButton = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Player1OptionButton
-@onready var player_2_option_button: OptionButton = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Player2OptionButton
+@export var player_1_option_button: Button
+@export var player_2_option_button: Button
+@export var quit_button: Button
 
 func _ready() -> void:
+	Global.player_1_control_method = Global.ControlMethod.COMPUTER
+	Global.player_2_control_method = Global.ControlMethod.COMPUTER
+	
 	for i in Global.ControlMethod.keys():
 		player_1_option_button.add_item(i)
 		player_2_option_button.add_item(i)
 	
 	player_1_option_button.select(0)
 	player_2_option_button.select(0)
+	
+	if OS.has_feature("web"):
+		quit_button.hide()
 
 func _on_start_game_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/game.tscn")

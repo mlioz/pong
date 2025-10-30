@@ -11,6 +11,11 @@ size = Vector2(8, 8)
 physics_interpolation_mode = 1
 safe_margin = 0.01
 script = ExtResource("1_yqm22")
+ball_size = null
+speed = null
+speed_increase = null
+max_speed = null
+color = null
 
 [node name="BallSprite" type="Sprite2D" parent="."]
 

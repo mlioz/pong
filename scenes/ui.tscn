@@ -1,10 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://mkm1wjtvulh0"]
+[gd_scene load_steps=3 format=3 uid="uid://mkm1wjtvulh0"]
+
+[ext_resource type="Script" uid="uid://bdbgb3lbg5mf6" path="res://scenes/ui.gd" id="1_nt7q6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_h0uja"]
 line_spacing = 0.0
 font_size = 32
 
-[node name="UI" type="CanvasLayer"]
+[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("mute_check_button")]
+script = ExtResource("1_nt7q6")
+mute_check_button = NodePath("PauseMenu/MarginContainer/VBoxContainer/MuteCheckButton")
 
 [node name="Score" type="Control" parent="."]
 layout_mode = 3
@@ -81,3 +85,9 @@ text = "Resume"
 [node name="Back" type="Button" parent="PauseMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Back"
+
+[node name="MuteCheckButton" type="CheckButton" parent="PauseMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Mute"
+
+[connection signal="toggled" from="PauseMenu/MarginContainer/VBoxContainer/MuteCheckButton" to="." method="_on_mute_check_button_toggled"]

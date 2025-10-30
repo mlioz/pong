@@ -5,7 +5,7 @@
 [sub_resource type="LabelSettings" id="LabelSettings_jwbto"]
 font_size = 64
 
-[node name="StartMenu" type="Control"]
+[node name="StartMenu" type="Control" node_paths=PackedStringArray("player_1_option_button", "player_2_option_button", "quit_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,6 +17,9 @@ offset_bottom = -162.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ouf4f")
+player_1_option_button = NodePath("MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Player1OptionButton")
+player_2_option_button = NodePath("MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Player2OptionButton")
+quit_button = NodePath("MarginContainer/VBoxContainer/VBoxContainer/QuitButton")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1

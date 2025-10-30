@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ditp5ps5bt8ji" path="res://scripts/game.gd" id="1_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://bpwnrfmt3m86n" path="res://scenes/ball.tscn" id="3_p57ef"]
-[ext_resource type="PackedScene" uid="uid://clkc2d78w8hbj" path="res://scenes/ui.tscn" id="4_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://mkm1wjtvulh0" path="res://scenes/ui.tscn" id="4_u5sy4"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7mycd"]
 friction = 0.0
@@ -39,5 +39,7 @@ position = Vector2(0, 323)
 shape = SubResource("WorldBoundaryShape2D_7mycd")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(1, 0)
+polygon = PackedVector2Array(288, 0, 288, 328, 286, 328, 286, 0)
 
 [connection signal="ball_exited_screen" from="Ball" to="." method="game_over"]

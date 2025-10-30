@@ -65,7 +65,7 @@ func unpause() -> void:
 	$UI/PauseMenu.hide()
 
 func reset_game():
-	player.reset_position(20, Global.SCREEN_SIZE.x / 2)
-	opponent.reset_position(Global.SCREEN_SIZE.x - 20, Global.SCREEN_SIZE.y / 2)
+	player.reset_position(10, Global.SCREEN_SIZE.x / 2)
+	opponent.reset_position(Global.SCREEN_SIZE.x - 10, Global.SCREEN_SIZE.y / 2)
 	
 	$Ball.reset()
