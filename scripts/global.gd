@@ -1,5 +1,7 @@
 extends Node
 
+const SCREEN_SIZE := Vector2(576, 324)
+
 enum ControlMethod { COMPUTER, WASD, ARROWS }
 
 var player_1_control_method: ControlMethod = ControlMethod.COMPUTER

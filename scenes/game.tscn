@@ -9,6 +9,7 @@ friction = 0.0
 bounce = 1.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7mycd"]
+distance = -1.0
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_272bh"]
 friction = 0.0
@@ -34,10 +35,9 @@ shape = SubResource("WorldBoundaryShape2D_7mycd")
 physics_material_override = SubResource("PhysicsMaterial_272bh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
-position = Vector2(0, 648)
+position = Vector2(0, 323)
 shape = SubResource("WorldBoundaryShape2D_7mycd")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(577, 0, 577, 648, 575, 648, 575, 0)
 
 [connection signal="ball_exited_screen" from="Ball" to="." method="game_over"]

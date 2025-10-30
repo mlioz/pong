@@ -3,9 +3,7 @@ extends CharacterBody2D
 @onready var low_bounce_sound: AudioStreamPlayer = $LowBounceSound
 @onready var high_bounce_sound: AudioStreamPlayer = $HighBounceSound
 
-@onready var screen_size: Vector2 = get_viewport().size
-
-@export var ball_size: int = 16
+@export var ball_size: int = 8
 @export var speed: float = 200
 @export var speed_increase: float = 0.1
 @export var max_speed: int = 500
@@ -46,4 +44,4 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 func reset() -> void:
 	var dir = Vector2(randf_range(-1, 1), randf_range(-0.3, 0.3)).normalized() 
 	velocity = dir * speed
-	position = screen_size / 2
+	position = Vector2(Global.SCREEN_SIZE.x, Global.SCREEN_SIZE.y) / 2

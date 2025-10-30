@@ -2,18 +2,17 @@ extends StaticBody2D
 class_name Paddle
 
 const PADDLE_SCENE: PackedScene = preload("res://scenes/paddle.tscn")
-
-@onready var screen_size: Vector2 = get_viewport().size
-@onready var new_position: Vector2
-@onready var paddle_size: Vector2 = Vector2(16, 128)
+const PADDLE_SIZE: Vector2 = Vector2(8, 64)
 
 @export var speed: float = 500
 @export var color: Color = Color.RED
 @export var control_method: Global.ControlMethod = Global.ControlMethod.WASD
 
+var new_position: Vector2
+
 func _ready() -> void:
 	$PlayerSprite.texture = draw_paddle(color)
-		
+	
 	if control_method == Global.ControlMethod.COMPUTER:
 		new_position = position
 
@@ -25,7 +24,7 @@ static func new_paddle(_color: Color, _control_method: Global.ControlMethod) -> 
 	
 	return paddle
 
-func reset_position(xpos: int, ypos: int) -> void:
+func reset_position(xpos: float, ypos: float) -> void:
 	position.x = xpos
 	position.y = ypos
 
@@ -33,9 +32,7 @@ func _process(delta: float) -> void:
 	
 	if control_method == Global.ControlMethod.COMPUTER:
 		position.y = move_toward(position.y, new_position.y, speed * delta)
-	
-		# Prevents the paddle from going off the screen
-		position.y = clampf(position.y, paddle_size.y / 2, screen_size.y - paddle_size.y / 2)
+
 	else:
 		var axis
 		if control_method == Global.ControlMethod.ARROWS:
@@ -45,11 +42,11 @@ func _process(delta: float) -> void:
 		
 		position.y += axis * speed * delta
 		
-		# Prevents the paddle from going off the screen
-		position.y = clampf(position.y, paddle_size.y / 2, screen_size.y - paddle_size.y / 2)
+	# Prevents the paddle from going off the screen
+	position.y = clampf(position.y, PADDLE_SIZE.y / 2, Global.SCREEN_SIZE.y - PADDLE_SIZE.y / 2)
 
 func draw_paddle(paddle_color: Color) -> ImageTexture:
-	var img = Image.create(int(paddle_size.x), int(paddle_size.y), false, Image.FORMAT_RGBA8)
+	var img = Image.create(int(PADDLE_SIZE.x), int(PADDLE_SIZE.y), false, Image.FORMAT_RGBA8)
 	img.fill(paddle_color)
 	
 	return ImageTexture.create_from_image(img)

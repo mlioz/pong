@@ -5,6 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://dl06ssb77l22c" path="res://assets/high.wav" id="3_ktgx5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g7tl7"]
+size = Vector2(8, 8)
 
 [node name="Ball" type="CharacterBody2D"]
 physics_interpolation_mode = 1

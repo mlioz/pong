@@ -3,8 +3,6 @@ class_name Game
 
 const GAME: PackedScene = preload("res://scenes/game.tscn")
 
-@onready var screen_size: Vector2i = get_viewport().size
-
 @onready var ui_player_score: Label = $UI/Score/MarginContainer/HBoxContainer/PlayerScore
 @onready var ui_opponent_score: Label = $UI/Score/MarginContainer/HBoxContainer/OpponentScore
 
@@ -64,7 +62,7 @@ func unpause() -> void:
 	$UI/PauseMenu.hide()
 
 func reset_game():
-	player.reset_position(20, int(screen_size.y / 2.0))
-	opponent.reset_position(screen_size.x - 25, int(screen_size.y / 2.0))
+	player.reset_position(20, Global.SCREEN_SIZE.x / 2)
+	opponent.reset_position(Global.SCREEN_SIZE.x - 20, Global.SCREEN_SIZE.y / 2)
 	
 	$Ball.reset()
