@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dprog65i2n2ke"]
 
-[ext_resource type="Script" uid="uid://kxkvu73cjod6" path="res://start_menu.gd" id="1_jwbto"]
+[ext_resource type="Script" uid="uid://kxkvu73cjod6" path="res://scripts/start_menu.gd" id="1_ouf4f"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_jwbto"]
 font_size = 64
@@ -16,19 +16,7 @@ offset_right = -286.0
 offset_bottom = -162.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_jwbto")
-
-[node name="Background" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.00930851
-anchor_top = 0.0075
-anchor_right = 1.0093085
-anchor_bottom = 0.9925
-offset_right = 6.1035156e-05
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.40784314, 0.40784314, 0.40784314, 0.6666667)
+script = ExtResource("1_ouf4f")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1

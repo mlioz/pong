@@ -1,6 +1,6 @@
 extends Control
 
-const GAME: PackedScene = preload("res://game.tscn")
+const GAME: PackedScene = preload("res://scenes/game.tscn")
 
 @onready var player_1_option_button: OptionButton = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Player1OptionButton
 @onready var player_2_option_button: OptionButton = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Player2OptionButton

@@ -1,12 +1,12 @@
 extends Node2D
 class_name Game
 
-const GAME: PackedScene = preload("res://game.tscn")
+const GAME: PackedScene = preload("res://scenes/game.tscn")
 
 @onready var screen_size: Vector2i = get_viewport().size
 
-@onready var ui_player_score: Label = $UI/Score/MarginContainer/VBoxContainer/HBoxContainer/PlayerScore
-@onready var ui_opponent_score: Label = $UI/Score/MarginContainer/VBoxContainer/HBoxContainer/OpponentScore
+@onready var ui_player_score: Label = $UI/Score/MarginContainer/HBoxContainer/PlayerScore
+@onready var ui_opponent_score: Label = $UI/Score/MarginContainer/HBoxContainer/OpponentScore
 
 @onready var ui_resume_button: Button = $UI/PauseMenu/MarginContainer/VBoxContainer/Resume
 @onready var ui_quit_button: Button = $UI/PauseMenu/MarginContainer/VBoxContainer/Quit

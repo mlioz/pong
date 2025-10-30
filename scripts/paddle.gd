@@ -1,7 +1,7 @@
 extends StaticBody2D
 class_name Paddle
 
-const PADDLE_SCENE: PackedScene = preload("res://paddle.tscn")
+const PADDLE_SCENE: PackedScene = preload("res://scenes/paddle.tscn")
 
 @onready var screen_size: Vector2 = get_viewport().size
 @onready var new_position: Vector2

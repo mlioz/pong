@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://clkc2d78w8hbj"]
 
-[ext_resource type="Script" uid="uid://cq8clphnykuji" path="res://ui.gd" id="1_fyqef"]
+[ext_resource type="Script" uid="uid://cq8clphnykuji" path="res://scripts/ui.gd" id="1_fyqef"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_h0uja"]
 font_size = 64
@@ -10,13 +10,12 @@ script = ExtResource("1_fyqef")
 
 [node name="Score" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 40.0
+anchors_preset = 0
+offset_left = 252.0
+offset_right = 900.0
+offset_bottom = 648.0
 grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Score"]
 layout_mode = 1
@@ -28,24 +27,20 @@ offset_right = 49.0
 offset_bottom = 88.0
 grow_horizontal = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Score/MarginContainer"]
-layout_mode = 2
-size_flags_vertical = 0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Score/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Score/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 24
 alignment = 1
 
-[node name="PlayerScore" type="Label" parent="Score/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="PlayerScore" type="Label" parent="Score/MarginContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 6
 text = "0"
 label_settings = SubResource("LabelSettings_h0uja")
 
-[node name="OpponentScore" type="Label" parent="Score/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="OpponentScore" type="Label" parent="Score/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "0"
@@ -54,9 +49,10 @@ label_settings = SubResource("LabelSettings_h0uja")
 [node name="PauseMenu" type="Control" parent="."]
 process_mode = 2
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 0
+offset_left = 252.0
+offset_right = 900.0
+offset_bottom = 648.0
 grow_horizontal = 2
 grow_vertical = 2
 
